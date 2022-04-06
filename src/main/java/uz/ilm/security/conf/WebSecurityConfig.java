@@ -21,8 +21,6 @@ import javax.persistence.Basic;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    public static final InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
-
     private final UserDetailsServiceCustom userDetailsServiceCustom;
 
     public WebSecurityConfig(UserDetailsServiceCustom userDetailsServiceCustom) {
@@ -31,19 +29,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests().anyRequest().permitAll().and().httpBasic();
-
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/users/*")
-//                .hasAnyAuthority()
         http
                 .csrf().disable()
                 .cors().disable()
                 .authorizeRequests()
                 .antMatchers("/")
                 .permitAll()
-//                .antMatchers("/users").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -77,26 +68,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
-
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//                User.withDefaultPasswordEncoder()
-//                        .username("user")
-//                        .password("password")
-//                        .roles(Roles.USER.name())
-//                        .build();
-//
-//        UserDetails admin =
-//                User.withDefaultPasswordEncoder()
-//                        .username("admin")
-//                        .password("password")
-//                        .roles(Roles.ADMIN.name())
-//                        .build();
-//
-//        inMemoryUserDetailsManager.createUser(user);
-//        inMemoryUserDetailsManager.createUser(admin);
-//        return inMemoryUserDetailsManager;
-//    }
 }
