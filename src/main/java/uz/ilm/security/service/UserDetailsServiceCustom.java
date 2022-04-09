@@ -12,7 +12,7 @@ import uz.ilm.security.model.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("userDetailsServiceIml")
 public class UserDetailsServiceCustom implements UserDetailsService {
 
     private final UserRepository userRepository;
